@@ -1,58 +1,46 @@
+# Smart Organizer Backend 🚀
 
-# Welcome to your CDK Python project!
+AWS CDKを使用して構築した、メモアプリ用のサーバーレス・バックエンド基盤です。
 
-This is a blank project for CDK development with Python.
+## 🌟 プロジェクトの概要
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+このプロジェクトは、フロントエンドからのリクエストを受け取り、データを安全に保存・管理するためのAPIを提供します。 Infrastructure as Code (IaC) を実践し、AWSの各リソースをPythonコードで定義・管理しています。
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
+## 🛠 使用技術
 
-To manually create a virtualenv on MacOS and Linux:
+- **Language**: Python 3.12 / 3.14
+- **Infrastructure**: AWS CDK (Cloud Development Kit)
+- **Services**:
+  - **Amazon API Gateway**: RESTful APIの提供
+  - **AWS Lambda**: サーバーレスなロジック実行（CORS対応済み）
+  - **Amazon DynamoDB**: 高速でスケーラブルなNoSQLデータベース
 
-```
-$ python -m venv .venv
-```
+## 🏗 アーキテクチャ
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+*(ここにアーキテクチャ図の画像を配置することを推奨します)*
 
-```
-$ source .venv/bin/activate
-```
+## 🚀 実装のこだわり
 
-If you are a Windows platform, you would activate the virtualenv like this:
+- **環境変数の活用**: Lambda内でテーブル名をハードコードせず、環境変数から取得するように設計し、保守性を高めました。
+- **CORS対応**: フロントエンド（React等）からの呼び出しを想定し、カスタムヘッダーを実装済みです。
+- **エラーハンドリング**: 400系、405系、500系のステータスコードを適切に返却するようにロジックを整理しました。
 
-```
-% .venv\Scripts\activate.bat
-```
+## 📝 セットアップ手順
 
-Once the virtualenv is activated, you can install the required dependencies.
+### 1. 依存関係のインストール
 
-```
-$ pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
 ```
 
-At this point you can now synthesize the CloudFormation template for this code.
+### 2. AWS環境の初期化
 
+```bash
+cdk bootstrap
 ```
-$ cdk synth
+
+### 3. デプロイ
+
+```bash
+cdk deploy
 ```
-
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
-
-## Useful commands
-
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
-
-Enjoy!
